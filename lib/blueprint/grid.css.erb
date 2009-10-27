@@ -18,19 +18,19 @@
 -------------------------------------------------------------- */
 
 /* Sets up basic grid floating and margin. */
-.column, <%= (1..column_count).map {|c| "div.span-#{c}" }.join(", ") %> {
+.column, <%= section_tags.map {|t| (1..column_count).map {|c| "#{t}.span-#{c}"} }.flatten.join(", ") %> {
   float: left;
   margin-right: <%= gutter_width %>px;
 }
 
 /* The last column in a row needs this class. */
-.last, div.last { margin-right: 0; }
+.last, <%= section_tags.map {|t| "#{t}.last"}.join(', ') %> { margin-right: 0; }
 
 /* Use these classes to set the width of a column. */
 .span-1 {width: <%= column_width %>px;}
 <% (2..column_count-1).each do |column| %>
 .span-<%= column %> {width: <%= (column_width + ((column - 1) * (column_width + gutter_width))).to_i %>px;<%= "margin-right: 0;" if column == column_count %>}<% end %>
-.span-<%= column_count %>, div.span-<%= column_count %> { width:<%= page_width %>px; margin-right:0; }
+.span-<%= column_count %>, <%= section_tags.map{|t| "#{t}.span-#{column_count}"}.join(', ') %> { width:<%= page_width %>px; margin-right:0; }
 
 /* Use these classes to set the width of an input. */
 <%= (1..column_count).map {|column| "input.span-#{column}, textarea.span-#{column}"}.join(", ") %> {
@@ -52,14 +52,14 @@ input.span-<%= column %>, textarea.span-<%= column %> { width: <%= ((column_widt
 
 
 /* Border on right hand side of a column. */
-div.border {
+<%= section_tags.map {|t| "#{t}.border"}.join(', ') %> {
   padding-right: <%= (gutter_width * 0.5 - 1).to_i %>px;
   margin-right: <%= (gutter_width * 0.5).to_i %>px;
   border-right: 1px solid #eee;
 }
 
 /* Border with more whitespace, spans one column. */
-div.colborder {
+<%= section_tags.map {|t| "#{t}.colborder"}.join(', ') %> {
   padding-right: <%= (column_width + 2*gutter_width - 1)/2.to_i %>px;
   margin-right: <%= (column_width + 2 * gutter_width)/2.to_i %>px;
   border-right: 1px solid #eee;

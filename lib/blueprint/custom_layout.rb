@@ -34,7 +34,12 @@ module Blueprint
     def page_width
       column_count * (column_width + gutter_width) - gutter_width
     end
-  
+
+    # Support HTML5 section elements for alternatives to div
+    def section_tags
+      Blueprint::SECTION_TAGS
+    end
+
     # ==== Options
     # * <tt>options</tt>
     #   * <tt>:column_count</tt> -- Sets the column count of generated CSS

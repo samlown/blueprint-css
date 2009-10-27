@@ -32,6 +32,10 @@ module Blueprint
   
   INPUT_PADDING =         5
   INPUT_BORDER =          1
+
+  # Section elements including div for HTML5 support
+  # As per: http://www.whatwg.org/specs/web-apps/current-work/multipage/sections.html
+  SECTION_TAGS = %w[div section nav article aside header footer]
 end
 
 Dir["#{File.join(Blueprint::LIB_PATH)}/*"].each do |file|
